@@ -1,6 +1,8 @@
 name: Docker
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
   push:
     branches: [ "master" ]
     tags: [ 'v*.*.*' ]
@@ -48,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: soapbox
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
