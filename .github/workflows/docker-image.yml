@@ -20,7 +20,7 @@ jobs:
       - name: Clone external repo
         run: |
           git config --global url.https://gitlab.com/.insteadOf git://gitlab.com/
-          git clone https://gitlab.com/soapbox-pub/soapbox.git .
+          git clone https://gitlab.com/soapbox-pub/soapbox.git
           
       # - name: Set up QEMU
       #   uses: docker/setup-qemu-action@v3
@@ -47,7 +47,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: soapbox
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
