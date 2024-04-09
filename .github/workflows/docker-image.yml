@@ -22,7 +22,7 @@ jobs:
       - name: Clone external repo
         run: |
           git config --global url.https://gitlab.com/.insteadOf git://gitlab.com/
-          git clone https://gitlab.com/soapbox-pub/soapbox.git
+          git clone https://gitlab.com/soapbox-pub/soapbox.git ${{ github.event.repository.name }}
         
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -46,7 +46,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
-          context: soapbox
+          context: ${{ github.event.repository.name }}
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
